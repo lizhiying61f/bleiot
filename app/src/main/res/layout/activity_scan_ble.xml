@@ -8,11 +8,15 @@
     android:orientation="vertical"
     tools:context=".view.ScanBleActivity">
     <Button
-        android:id="@+id/startScan" android:onClick="startScan"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:id="@+id/startScan" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:onClick="startScan"
         android:text="扫描"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/bleList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <com.qmuiteam.qmui.widget.QMUILoadingView
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

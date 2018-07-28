@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.ScanResultActivity">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:padding="10dp">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:text="配置时间" android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/hour"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:hint="小时" android:inputType="number" android:textSize="16sp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:layout_margin="10dp" android:text="时" android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/minute"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:hint="分钟" android:inputType="number" android:textSize="16sp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:layout_margin="10dp" android:text="分" android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/second"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:hint="秒" android:inputType="number" android:textSize="16sp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp" android:text="秒" android:textSize="16sp"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal" android:padding="10dp">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:text="配置发射频率" android:textSize="16sp"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" android:drawableRight="@drawable/drop_down"
+                  android:onClick="configFrequency" android:text="选择"
+                  android:textSize="16sp"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal" android:padding="10dp">
+        <TextView android:layout_width="0dp"
+                  android:layout_height="wrap_content" android:layout_weight="1"
+                  android:onClick="configKuoPin"
+                  android:text="配置扩频因子" android:textSize="16sp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:drawableRight="@drawable/drop_down" android:text="选择"
+                  android:textSize="16sp"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal" android:padding="10dp">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:text="配置ADR" android:textSize="16sp"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" android:drawableRight="@drawable/drop_down"
+                  android:onClick="configADR" android:text="选择"
+                  android:textSize="16sp"/>
+    </LinearLayout>
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:onClick="submit" android:text="发送"/>
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_margin="10dp"/>
+    <EditText
+        android:id="@+id/output"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_margin="10dp"/>
+</LinearLayout>

@@ -2,6 +2,7 @@ package com.uniteddata.bleiot.view;
 
 import android.Manifest;
 import android.bluetooth.BluetoothGatt;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,7 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.clj.fastble.BleManager;
@@ -22,6 +22,7 @@ import com.clj.fastble.callback.BleScanCallback;
 import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
 import com.clj.fastble.scan.BleScanRuleConfig;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.uniteddata.bleiot.R;
 import com.uniteddata.bleiot.adapter.BleDeviceAdapter;
 
@@ -31,6 +32,7 @@ public class ScanBleActivity extends AppCompatActivity {
     Button startScan;
     RecyclerView bleRecyclerView;
     private BleDeviceAdapter adapter;
+    private QMUITipDialog tipDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,11 +84,15 @@ public class ScanBleActivity extends AppCompatActivity {
 
     public void startScan(View v){
         Log.e("SCAN","startScan");
+        if (tipDialog== null){
+            tipDialog = new QMUITipDialog.Builder(this).setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING).setTipWord("正在加载").create();
+        }
         BleManager.getInstance().scan(new BleScanCallback() {
             @Override
             public void onScanStarted(boolean success) {
                 // 开始扫描（主线程）
                 Log.e("SCAN",success + "");
+                tipDialog.show();
             }
 
             @Override
@@ -100,6 +106,7 @@ public class ScanBleActivity extends AppCompatActivity {
                 // 扫描结束，列出所有扫描到的符合扫描规则的BLE设备（主线程）
                 Log.e("SCAN",scanResultList.toString());
                 initAdatper(scanResultList);
+                tipDialog.hide();
             }
         });
     }
@@ -127,6 +134,7 @@ public class ScanBleActivity extends AppCompatActivity {
             @Override
             public void onStartConnect() {
                 // 开始连接
+                tipDialog.show();
             }
 
             @Override
@@ -137,7 +145,10 @@ public class ScanBleActivity extends AppCompatActivity {
             @Override
             public void onConnectSuccess(BleDevice bleDevice, BluetoothGatt gatt, int status) {
                 // 连接成功，BleDevice即为所连接的BLE设备
-                Toast.makeText(ScanBleActivity.this,bleDevice.getName(),Toast.LENGTH_SHORT).show();
+                tipDialog.hide();
+                Intent intent = new Intent(ScanBleActivity.this,ScanResultActivity.class);
+                intent.putExtra("ADDRESS",bleDevice);
+                startActivity(intent);
             }
 
             @Override
